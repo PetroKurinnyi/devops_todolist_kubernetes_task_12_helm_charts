@@ -18,11 +18,12 @@ spec:
       - name: {{ .Values.mysql.image.name }}
         image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}
         env:
+        {{- $chartName := .Chart.Name }}
         {{- range $key, $value := .Values.mysql.secrets }}
         - name: {{ $key }}
           valueFrom:
             secretKeyRef:
-              name: {{ .Chart.Name }}-secrets
+              name: {{ $chartName }}-secrets
               key: {{ $key }}
         {{- end }}
         - name: MYSQL_DATABASE
@@ -77,7 +78,7 @@ spec:
                     - {{ . }}
                     {{- end }}
                   {{- end }}
-              topologyKey: {{ .Values.mysql.affinity.podAntiAffinity.topologyKey}}
+              topologyKey: {{ .Values.mysql.affinity.podAntiAffinity.topologyKey }}
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
