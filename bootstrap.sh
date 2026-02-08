@@ -1,6 +1,6 @@
 kind create cluster --config cluster.yml
 
-cd helm-chart/todoapp
+cd .infrastructure/helm-chart/todoapp
 helm dependency update
 
 helm install todoapp
