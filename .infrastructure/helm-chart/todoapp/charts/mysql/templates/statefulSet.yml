@@ -93,7 +93,7 @@ spec:
                   {{- end }}
   volumeClaimTemplates:
   - metadata:
-      name: data
+      name: {{ .Chart.Name }}-data
     spec:
       accessModes: ["ReadWriteOnce"]
       resources:
